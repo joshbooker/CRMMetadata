@@ -1,4 +1,5 @@
-﻿@model System.Web.Mvc.HandleErrorInfo
+﻿@using Microsoft.Office365.OAuth
+@model System.Web.Mvc.HandleErrorInfo
 
 @{
     ViewBag.Title = "Error";
@@ -9,3 +10,8 @@
 
 @Model.Exception.ToString()
 
+@if (@Model.Exception is AuthenticationFailedException)
+{
+    @Html.Raw((@Model.Exception as AuthenticationFailedException).ErrorCode)
+    @Html.Raw((@Model.Exception as AuthenticationFailedException).ErrorDescription)
+}
